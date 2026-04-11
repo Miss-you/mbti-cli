@@ -12,6 +12,6 @@ func NewRootCmd() *cobra.Command {
 		},
 	}
 
-	root.AddCommand(newVersionCmd(), newQuestionsCmd())
+	root.AddCommand(newVersionCmd(), newQuestionsCmd(), newScoreCmd())
 	return root
 }

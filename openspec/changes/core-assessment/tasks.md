@@ -54,3 +54,10 @@
 - [x] 9.3 Render selected question sets without exposing scoring internals such as option scores, reverse flags, thresholds, or dimension metadata
 - [x] 9.4 Run `go test -count=1 ./cmd/mbti-cli` and a focused JSON CLI smoke test
 - [x] 9.5 Run repo gates and keep scoring, answer parsing, classifier, and result renderer behavior unchanged
+
+## 10. Score Command
+
+- [x] 10.1 Add failing Cobra command tests for `score --questions <file> --answers <file> --format json`, text output, and invalid inputs
+- [x] 10.2 Implement `mbti-cli score` as a thin CLI orchestration layer over question bank loading, answer parsing, scoring, classification, and result rendering
+- [x] 10.3 Run `go test -count=1 ./cmd/mbti-cli` and a focused JSON CLI smoke test
+- [x] 10.4 Run repo gates and keep existing question, answer, scoring, classifier, and renderer behavior unchanged
