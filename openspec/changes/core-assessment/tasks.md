@@ -22,3 +22,9 @@
 - [x] 4.1 Add failing validator tests for canonical v3 success and representative invalid bank schemas
 - [x] 4.2 Implement `Validate(bank)` with deterministic aggregated validation errors
 - [x] 4.3 Run `go test -count=1 ./internal/questionbank` and keep scoring/answer validation out of scope
+
+## 5. Answer Validation
+
+- [x] 5.1 Add failing `internal/answers` validation tests for valid strict answers, unknown IDs, invalid options, missing answers, and aggregated deterministic errors
+- [x] 5.2 Implement strict bank-aware `Validate(bank, answers)` behavior with deterministic aggregated validation errors
+- [x] 5.3 Run `go test -count=1 ./internal/answers` and keep scoring/CLI behavior out of scope

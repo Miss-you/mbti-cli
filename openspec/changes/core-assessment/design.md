@@ -13,10 +13,10 @@
 - Prove missing and malformed files produce clear errors.
 - Add a focused canonical answer-file parser that returns normalized answer codes.
 - Add a focused question-bank schema validator for metadata, dimensions, question shape, option shape, and thresholds.
+- Add strict answer validation against a question bank for unknown IDs, invalid option codes, and missing required answers.
 
 **Non-Goals:**
 
-- No answer validation against a question bank.
 - No scoring, threshold classification, rendering, or CLI command wiring.
 
 ## Decisions
@@ -34,6 +34,7 @@
 - Add `questionbank.Validate(Bank) error` as the T03 schema gate. It accumulates deterministic issues for metadata, supported dimensions, dimension counts, question IDs, localized text, option codes, score values, and threshold buckets.
 - Keep `LoadFile` validation-free so callers can choose when to report parse errors versus schema errors.
 - Treat `reverse` as metadata only. T03 validates presence through the typed model but does not transform option scores or scoring behavior.
+- Add `answers.Validate(questionbank.Bank, answers.Set) error` as the T05 strict answer gate. It checks answer IDs and option codes against the bank, requires every bank question to be answered, and keeps scoring behavior out of scope.
 
 ## Risks / Trade-offs
 
