@@ -28,3 +28,9 @@
 - [x] 5.1 Add failing `internal/answers` validation tests for valid strict answers, unknown IDs, invalid options, missing answers, and aggregated deterministic errors
 - [x] 5.2 Implement strict bank-aware `Validate(bank, answers)` behavior with deterministic aggregated validation errors
 - [x] 5.3 Run `go test -count=1 ./internal/answers` and keep scoring/CLI behavior out of scope
+
+## 6. Scoring Engine
+
+- [x] 6.1 Add failing `internal/scoring` tests for deterministic dimension totals, reverse metadata not being reapplied, and strict invalid answers failing before aggregation
+- [x] 6.2 Implement minimal `Score(bank, answers)` behavior with signed option score aggregation
+- [x] 6.3 Run `go test -count=1 ./internal/scoring` and keep threshold classification, result rendering, and CLI behavior out of scope
