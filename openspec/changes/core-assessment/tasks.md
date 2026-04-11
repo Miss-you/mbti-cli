@@ -46,3 +46,11 @@
 - [x] 8.1 Add failing `internal/result` golden tests for stable JSON, readable text, balanced dimension rendering, and missing classification errors
 - [x] 8.2 Implement minimal summary DTO construction plus JSON and text renderers
 - [x] 8.3 Run `go test -count=1 ./internal/result` and keep Cobra command wiring out of scope
+
+## 9. Questions Command
+
+- [x] 9.1 Add failing Cobra command tests for `questions --questions <file> --format json`, text output, deterministic selection, and invalid inputs
+- [x] 9.2 Implement `mbti-cli questions` as a thin CLI orchestration layer over question bank loading and validation
+- [x] 9.3 Render selected question sets without exposing scoring internals such as option scores, reverse flags, thresholds, or dimension metadata
+- [x] 9.4 Run `go test -count=1 ./cmd/mbti-cli` and a focused JSON CLI smoke test
+- [x] 9.5 Run repo gates and keep scoring, answer parsing, classifier, and result renderer behavior unchanged
