@@ -13,3 +13,24 @@ The system SHALL keep T01 limited to data representation and JSON unmarshalling,
 #### Scenario: Model package remains representation-only
 - **WHEN** the question bank model package is used by later tasks
 - **THEN** validation, file loading, score aggregation, threshold classification, rendering, and CLI behavior are provided by later task-owned code, not by the T01 model
+
+### Requirement: Question bank loader reads a JSON file into the typed model
+The system SHALL provide a file-path loader for question bank JSON files that returns the typed `Bank` and source metadata.
+
+#### Scenario: Canonical v3 bank loads from path
+- **WHEN** `questions/mbti-questions-v3.json` is loaded from its filesystem path
+- **THEN** the returned result includes a typed `Bank` with representative metadata and questions
+- **AND** the returned source metadata includes the input path, base filename, and positive byte size
+
+#### Scenario: Missing bank file reports a clear read error
+- **WHEN** the loader is called with a path that does not exist
+- **THEN** it returns an error that includes the failed read operation and path context
+- **AND** the error preserves the underlying missing-file error for callers
+
+#### Scenario: Malformed bank file reports a clear parse error
+- **WHEN** the loader reads a file that is not valid question bank JSON
+- **THEN** it returns an error that includes parse context and the source path
+
+#### Scenario: Empty bank path is rejected before reading
+- **WHEN** the loader is called with an empty path
+- **THEN** it returns a clear path-required error

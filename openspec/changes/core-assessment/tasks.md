@@ -4,3 +4,9 @@
 - [x] 1.2 Add a failing `internal/questionbank` unmarshal contract test for representative v3 fields
 - [x] 1.3 Implement minimal JSON model types and constants
 - [x] 1.4 Run `go test ./internal/questionbank` and keep validation/scoring behavior out of scope
+
+## 2. Question Bank Loader
+
+- [x] 2.1 Add failing loader unit tests for valid, missing, malformed, and empty-path cases
+- [x] 2.2 Implement `LoadFile(path)` with typed `Bank` result and source metadata
+- [x] 2.3 Run `go test -count=1 ./internal/questionbank` and keep schema validation out of scope
