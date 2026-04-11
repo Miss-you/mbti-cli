@@ -29,7 +29,7 @@
 
 | ID | 标题 | 目标 | 依赖 | 并行组 | 状态 | Owner | 认领时间 | Workspace | Change | 完成条件 | Notes |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| T01 | Question bank model | 定义题库 JSON 对应 Go structs，覆盖 meta、dimensions、thresholds、questions、options、reverse | - | A | todo | - | - | workspace/t01/ | core-assessment | v3 题库可无字段丢失地 unmarshal | first gate: `go test ./internal/questionbank` |
+| T01 | Question bank model | 定义题库 JSON 对应 Go structs，覆盖 meta、dimensions、thresholds、questions、options、reverse | - | A | done | codex | 2026-04-11 13:24 CST | workspace/t01/ | core-assessment | v3 题库可无字段丢失地 unmarshal | done: review 97/100; `make fmt`, `make test`, `PATH=/tmp/mbti-cli-tools/bin:$PATH make lint`, `make build`, `go test -count=1 ./...`, `openspec validate core-assessment`; change kept active for later phase tasks |
 | T02 | Question bank loader | 从文件路径读取题库，返回 typed bank 和 source metadata | T01 | A | todo | - | - | workspace/t02/ | core-assessment | valid file loads，missing/malformed file returns clear error | first gate: loader unit tests |
 | T03 | Schema validator | 校验题库结构、维度计数、option code/score、threshold 完整性 | T01,T02 | A | todo | - | - | workspace/t03/ | core-assessment | v3 validates，invalid fixtures fail for expected reasons | first gate: validator table tests |
 | T04 | Answer model and parser | 定义 canonical answer file 并解析为 `questionID -> optionCode` | T01 | B | todo | - | - | workspace/t04/ | core-assessment | map-form answer file 可解析，option code 规范化 | first gate: answer parser tests |
