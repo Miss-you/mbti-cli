@@ -40,3 +40,9 @@
 - [x] 7.1 Add failing `internal/scoring` classifier tests for threshold boundaries, zero/balanced behavior, fixed type order, and classifier error cases
 - [x] 7.2 Implement `Classify(bank, result)` with threshold strength labels, pole metadata, dimension letters, balanced zero handling, and deterministic type generation
 - [x] 7.3 Run `go test -count=1 ./internal/scoring` and keep rendering and CLI behavior out of scope
+
+## 8. Result Renderers
+
+- [x] 8.1 Add failing `internal/result` golden tests for stable JSON, readable text, balanced dimension rendering, and missing classification errors
+- [x] 8.2 Implement minimal summary DTO construction plus JSON and text renderers
+- [x] 8.3 Run `go test -count=1 ./internal/result` and keep Cobra command wiring out of scope
