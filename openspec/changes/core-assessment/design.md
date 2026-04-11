@@ -12,10 +12,10 @@
 - Add a focused file-path loader that returns typed bank data and source metadata.
 - Prove missing and malformed files produce clear errors.
 - Add a focused canonical answer-file parser that returns normalized answer codes.
+- Add a focused question-bank schema validator for metadata, dimensions, question shape, option shape, and thresholds.
 
 **Non-Goals:**
 
-- No schema validation.
 - No answer validation against a question bank.
 - No scoring, threshold classification, rendering, or CLI command wiring.
 
@@ -31,9 +31,13 @@
 - Create `internal/answers` for the answer-file parser so answer parsing, later answer validation, and scoring can remain separate from question bank loading.
 - T04 parser behavior is structural only: it decodes the canonical top-level `answers` map and normalizes option codes with trim + uppercase.
 - Preserve question IDs as supplied by the answer file. T05 owns bank-aware unknown-ID, invalid-option, and missing-answer validation.
+- Add `questionbank.Validate(Bank) error` as the T03 schema gate. It accumulates deterministic issues for metadata, supported dimensions, dimension counts, question IDs, localized text, option codes, score values, and threshold buckets.
+- Keep `LoadFile` validation-free so callers can choose when to report parse errors versus schema errors.
+- Treat `reverse` as metadata only. T03 validates presence through the typed model but does not transform option scores or scoring behavior.
 
 ## Risks / Trade-offs
 
 - The main workspace currently holds `questions/mbti-questions-v3.json` as an untracked file, so adding it here creates data churn. Mitigation: add only the canonical v3 file required by the approved design and task acceptance.
 - Struct types can imply validation guarantees they do not enforce. Mitigation: keep validation out of names and tests; later T03 owns schema checks.
 - Loader metadata can grow over time. Mitigation: start with only path, base filename, and size because those are enough for diagnostics and later CLI output.
+- A validator can drift into scoring behavior. Mitigation: keep T03 limited to static bank schema checks and defer score aggregation and classification to later tasks.

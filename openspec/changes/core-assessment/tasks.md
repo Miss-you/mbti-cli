@@ -16,3 +16,9 @@
 - [x] 3.1 Add failing `internal/answers` parser tests for canonical map parsing, option-code normalization, missing/null answers, malformed JSON, and structurally invalid values
 - [x] 3.2 Implement minimal answer file model and `Parse(data)` behavior
 - [x] 3.3 Run `go test -count=1 ./internal/answers` and keep bank-aware answer validation out of scope
+
+## 4. Question Bank Schema Validator
+
+- [x] 4.1 Add failing validator tests for canonical v3 success and representative invalid bank schemas
+- [x] 4.2 Implement `Validate(bank)` with deterministic aggregated validation errors
+- [x] 4.3 Run `go test -count=1 ./internal/questionbank` and keep scoring/answer validation out of scope
