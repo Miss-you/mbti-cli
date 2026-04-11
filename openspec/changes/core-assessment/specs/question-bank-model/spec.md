@@ -7,12 +7,12 @@ The system SHALL provide a Go model for the canonical question bank JSON shape, 
 - **WHEN** `questions/mbti-questions-v3.json` is unmarshaled into the question bank model
 - **THEN** metadata, dimensions, thresholds, question ids, dimensions, reverse flags, scenarios, options, labels, and signed scores are available without field loss
 
-### Requirement: Question bank model does not validate or score
-The system SHALL keep T01 limited to data representation and JSON unmarshalling, without enforcing schema rules or applying scoring behavior.
+### Requirement: Question bank model types do not validate or score
+The system SHALL keep the T01 model types limited to data representation and JSON unmarshalling, without enforcing schema rules or applying scoring behavior.
 
-#### Scenario: Model package remains representation-only
-- **WHEN** the question bank model package is used by later tasks
-- **THEN** validation, file loading, score aggregation, threshold classification, rendering, and CLI behavior are provided by later task-owned code, not by the T01 model
+#### Scenario: T01 model types remain representation-only
+- **WHEN** the question bank model types are used by later tasks
+- **THEN** validation, file loading, score aggregation, threshold classification, rendering, and CLI behavior are provided by task-owned code outside the T01 model types
 
 ### Requirement: Question bank loader reads a JSON file into the typed model
 The system SHALL provide a file-path loader for question bank JSON files that returns the typed `Bank` and source metadata.
