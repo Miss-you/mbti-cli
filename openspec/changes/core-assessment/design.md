@@ -11,11 +11,12 @@
 - Prove the model with a focused unmarshal contract test.
 - Add a focused file-path loader that returns typed bank data and source metadata.
 - Prove missing and malformed files produce clear errors.
+- Add a focused canonical answer-file parser that returns normalized answer codes.
 
 **Non-Goals:**
 
 - No schema validation.
-- No answer parsing or validation.
+- No answer validation against a question bank.
 - No scoring, threshold classification, rendering, or CLI command wiring.
 
 ## Decisions
@@ -27,6 +28,9 @@
 - Add only the v3 canonical question file needed by this task's contract test. Other question bank versions remain out of scope.
 - Keep loader behavior filesystem-focused for T02: `LoadFile(path)` reads JSON, unmarshals `Bank`, and returns path, filename, and byte-size source metadata.
 - Wrap read and parse errors with path-specific context while preserving the underlying error for callers that need `errors.Is`.
+- Create `internal/answers` for the answer-file parser so answer parsing, later answer validation, and scoring can remain separate from question bank loading.
+- T04 parser behavior is structural only: it decodes the canonical top-level `answers` map and normalizes option codes with trim + uppercase.
+- Preserve question IDs as supplied by the answer file. T05 owns bank-aware unknown-ID, invalid-option, and missing-answer validation.
 
 ## Risks / Trade-offs
 
