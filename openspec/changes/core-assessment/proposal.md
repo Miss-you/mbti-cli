@@ -9,7 +9,8 @@ The first core-assessment slices need a typed representation of the canonical v3
 - Add a file-path loader that returns the typed bank plus source metadata.
 - Add a focused canonical answer-file parser that returns normalized `questionID -> optionCode` answers.
 - Add question-bank schema validation for metadata, dimensions, questions, options, and thresholds.
-- Keep answer validation against a bank, scoring, rendering, and CLI integration out of these early slices.
+- Add strict answer validation against a bank for unknown IDs, invalid options, and missing answers.
+- Keep scoring, rendering, and CLI integration out of these early slices.
 
 ## Capabilities
 
@@ -18,6 +19,7 @@ The first core-assessment slices need a typed representation of the canonical v3
 - `question-bank-loader`: Loads a question bank JSON file into the typed model with source metadata.
 - `question-bank-validator`: Validates canonical question bank schema invariants after loading/unmarshalling.
 - `answer-parser`: Parses the first-phase canonical answer JSON map into normalized answer codes.
+- `answer-validation`: Validates parsed answer sets against a question bank in strict mode.
 
 ### Modified Capabilities
 
@@ -26,4 +28,4 @@ The first core-assessment slices need a typed representation of the canonical v3
 - Adds `internal/questionbank`.
 - Adds `internal/answers`.
 - Adds the canonical v3 question bank fixture needed by model tests.
-- Establishes types, loading, schema validation, and answer parsing behavior that later answer validation, scoring, rendering, and CLI tasks can consume.
+- Establishes types, loading, schema validation, answer parsing, and strict answer validation behavior that later scoring, rendering, and CLI tasks can consume.
