@@ -19,7 +19,7 @@ func Parse(data []byte) (Set, error) {
 	}
 
 	if file.Answers == nil {
-		return nil, fmt.Errorf("answers object is required")
+		return nil, fmt.Errorf("parse answer file: answers object is required")
 	}
 
 	answers := make(Set, len(file.Answers))

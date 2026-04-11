@@ -32,6 +32,7 @@ func TestParseRejectsMissingOrNullAnswersObject(t *testing.T) {
 			_, err := Parse([]byte(input))
 
 			require.Error(t, err)
+			require.ErrorContains(t, err, "parse answer file")
 			require.ErrorContains(t, err, "answers object is required")
 		})
 	}
