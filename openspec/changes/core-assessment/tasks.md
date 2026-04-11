@@ -34,3 +34,9 @@
 - [x] 6.1 Add failing `internal/scoring` tests for deterministic dimension totals, reverse metadata not being reapplied, and strict invalid answers failing before aggregation
 - [x] 6.2 Implement minimal `Score(bank, answers)` behavior with signed option score aggregation
 - [x] 6.3 Run `go test -count=1 ./internal/scoring` and keep threshold classification, result rendering, and CLI behavior out of scope
+
+## 7. Threshold and Type Classifier
+
+- [x] 7.1 Add failing `internal/scoring` classifier tests for threshold boundaries, zero/balanced behavior, fixed type order, and classifier error cases
+- [x] 7.2 Implement `Classify(bank, result)` with threshold strength labels, pole metadata, dimension letters, balanced zero handling, and deterministic type generation
+- [x] 7.3 Run `go test -count=1 ./internal/scoring` and keep rendering and CLI behavior out of scope
