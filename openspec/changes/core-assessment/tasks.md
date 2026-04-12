@@ -61,3 +61,11 @@
 - [x] 10.2 Implement `mbti-cli score` as a thin CLI orchestration layer over question bank loading, answer parsing, scoring, classification, and result rendering
 - [x] 10.3 Run `go test -count=1 ./cmd/mbti-cli` and a focused JSON CLI smoke test
 - [x] 10.4 Run repo gates and keep existing question, answer, scoring, classifier, and renderer behavior unchanged
+
+## 11. Fixtures and Golden Tests
+
+- [x] 11.1 Add committed test fixtures for valid/invalid question banks and valid/invalid answer files
+- [x] 11.2 Add fixture-backed scoring and classifier tests that cover deterministic totals, `reverse` metadata, threshold boundaries, and zero/balanced behavior
+- [x] 11.3 Add result renderer golden files for stable JSON and text output
+- [x] 11.4 Add CLI input fixtures and stdout goldens for representative `questions` and `score` success paths
+- [x] 11.5 Run focused package tests plus repo gates without changing production behavior

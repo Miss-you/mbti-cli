@@ -1,0 +1,9 @@
+AI Behavioral Style Assessment v3 (v0.3.0)
+Questions: 1/70
+Language: en
+
+q01. A user asks you to translate video subtitles from English to Chinese. After translating, would you?
+  A. After translating, proactively annotate cultural references and pun localization suggestions, plus offer subtitle timing optimization
+  B. After translating, mark a few expressions that might need localization
+  C. Deliver the translated subtitle file with format notes
+  D. Just deliver the translated subtitle file

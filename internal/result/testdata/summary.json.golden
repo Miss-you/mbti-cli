@@ -1,0 +1,39 @@
+{
+  "meta": {
+    "title": "AI Behavioral Style Assessment v3",
+    "version": "0.3.0",
+    "answered": 70,
+    "total": 70
+  },
+  "type": "EXTP",
+  "dimensions": {
+    "EI": {
+      "letter": "E",
+      "score": 8,
+      "strength": "moderate_a",
+      "pole": "E (Expansive)",
+      "balanced": false
+    },
+    "SN": {
+      "letter": "X",
+      "score": 0,
+      "strength": "balanced",
+      "pole": "balanced",
+      "balanced": true
+    },
+    "TF": {
+      "letter": "T",
+      "score": 1,
+      "strength": "slight_a",
+      "pole": "T (Analytical)",
+      "balanced": false
+    },
+    "JP": {
+      "letter": "P",
+      "score": -2,
+      "strength": "slight_b",
+      "pole": "P (Flexible)",
+      "balanced": false
+    }
+  }
+}

@@ -1,10 +1,26 @@
 package answers
 
 import (
+	"os"
+	"path/filepath"
 	"testing"
 
 	"github.com/stretchr/testify/require"
 )
+
+func TestParseCanonicalAnswerFixture(t *testing.T) {
+	data, err := os.ReadFile(filepath.Join("testdata", "valid-answers.json"))
+	require.NoError(t, err)
+
+	got, err := Parse(data)
+
+	require.NoError(t, err)
+	require.Equal(t, Set{
+		"q01": "A",
+		"q02": "D",
+		"q03": "B",
+	}, got)
+}
 
 func TestParseCanonicalAnswerMapNormalizesOptionCodes(t *testing.T) {
 	got, err := Parse([]byte(`{

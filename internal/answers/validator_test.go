@@ -1,6 +1,8 @@
 package answers
 
 import (
+	"os"
+	"path/filepath"
 	"testing"
 
 	"github.com/Miss-you/mbti-cli/internal/questionbank"
@@ -30,6 +32,21 @@ func TestValidateRejectsUnknownInvalidAndMissingAnswers(t *testing.T) {
 
 	require.Error(t, err)
 	require.ErrorContains(t, err, "answer validation failed")
+	require.ErrorContains(t, err, "unknown question id unknown")
+	require.ErrorContains(t, err, "question q01 option Z is not valid")
+	require.ErrorContains(t, err, "missing answer for question q02")
+	require.ErrorContains(t, err, "missing answer for question q03")
+}
+
+func TestValidateRejectsInvalidAnswerFixture(t *testing.T) {
+	data, err := os.ReadFile(filepath.Join("testdata", "invalid-answers.json"))
+	require.NoError(t, err)
+	answerSet, err := Parse(data)
+	require.NoError(t, err)
+
+	err = Validate(answerValidationBank(), answerSet)
+
+	require.Error(t, err)
 	require.ErrorContains(t, err, "unknown question id unknown")
 	require.ErrorContains(t, err, "question q01 option Z is not valid")
 	require.ErrorContains(t, err, "missing answer for question q02")

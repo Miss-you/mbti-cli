@@ -111,6 +111,46 @@ func TestClassifyUsesCanonicalV3BankMetadata(t *testing.T) {
 	require.Equal(t, "J (Structured)", classification.Dimensions[questionbank.DimensionJP].Pole)
 }
 
+func TestClassifyUsesFixtureThresholdBoundariesAndBalancedZero(t *testing.T) {
+	bank := loadScoringFixtureBank(t)
+	tests := []struct {
+		name       string
+		score      int
+		strength   questionbank.Strength
+		wantLetter string
+		wantPole   string
+		balanced   bool
+	}{
+		{name: "strong A lower", score: 13, strength: questionbank.StrengthStrongA, wantLetter: "E", wantPole: "E (Expansive)"},
+		{name: "moderate A upper", score: 12, strength: questionbank.StrengthModerateA, wantLetter: "E", wantPole: "E (Expansive)"},
+		{name: "moderate A lower", score: 5, strength: questionbank.StrengthModerateA, wantLetter: "E", wantPole: "E (Expansive)"},
+		{name: "slight A upper", score: 4, strength: questionbank.StrengthSlightA, wantLetter: "E", wantPole: "E (Expansive)"},
+		{name: "slight A lower", score: 1, strength: questionbank.StrengthSlightA, wantLetter: "E", wantPole: "E (Expansive)"},
+		{name: "balanced zero", score: 0, wantLetter: "X", wantPole: "balanced", balanced: true},
+		{name: "slight B upper", score: -1, strength: questionbank.StrengthSlightB, wantLetter: "I", wantPole: "I (Focused)"},
+		{name: "slight B lower", score: -4, strength: questionbank.StrengthSlightB, wantLetter: "I", wantPole: "I (Focused)"},
+		{name: "moderate B upper", score: -5, strength: questionbank.StrengthModerateB, wantLetter: "I", wantPole: "I (Focused)"},
+		{name: "moderate B lower", score: -12, strength: questionbank.StrengthModerateB, wantLetter: "I", wantPole: "I (Focused)"},
+		{name: "strong B upper", score: -13, strength: questionbank.StrengthStrongB, wantLetter: "I", wantPole: "I (Focused)"},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			classification, err := Classify(bank, Result{
+				DimensionScores: map[questionbank.Dimension]int{questionbank.DimensionEI: tt.score},
+			})
+
+			require.NoError(t, err)
+			got := classification.Dimensions[questionbank.DimensionEI]
+			require.Equal(t, tt.score, got.Score)
+			require.Equal(t, tt.strength, got.Strength)
+			require.Equal(t, tt.wantLetter, got.Letter)
+			require.Equal(t, tt.wantPole, got.Pole)
+			require.Equal(t, tt.balanced, got.Balanced)
+		})
+	}
+}
+
 func TestClassifyReportsInvalidClassifierInputs(t *testing.T) {
 	t.Run("uncovered non-zero score", func(t *testing.T) {
 		_, err := Classify(classifierBank(), Result{

@@ -51,12 +51,7 @@ func TestQuestionsCommand_RendersLocalizedTextWithCount(t *testing.T) {
 	require.NoError(t, err)
 	require.Empty(t, stderr)
 
-	require.Contains(t, stdout, "AI Behavioral Style Assessment v3 (v0.3.0)")
-	require.Contains(t, stdout, "Questions: 1/70")
-	require.Contains(t, stdout, "Language: en")
-	require.Contains(t, stdout, "q01. A user asks you to translate video subtitles")
-	require.Contains(t, stdout, "A. After translating, proactively annotate")
-	require.NotContains(t, stdout, "q02.")
+	require.Equal(t, readCLIGolden(t, "questions-one-en.txt.golden"), stdout)
 }
 
 func TestQuestionsCommand_SeededSelectionIsDeterministic(t *testing.T) {
