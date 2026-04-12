@@ -41,6 +41,7 @@
 | T10 | Score command | 接入 `mbti-cli score`，读取 answer file 并输出 text/json result | T05,T08 | owner | done | codex | 2026-04-12 02:12 CST | workspace/t10/ | core-assessment | `score --questions <file> --answers <file> --format text|json` 可跑通 | done: TDD red/green; code review fixed parse error context and strict validation command tests; `go test -count=1 ./cmd/mbti-cli`; JSON smoke passed; `make fmt`, `make test`, `make lint`, `make build`, `openspec validate core-assessment`; change kept active for later phase tasks |
 | T11 | Fixtures and golden tests | 建 valid/invalid bank、answer、threshold、golden output fixtures | T03,T05,T08,T10 | owner | done | codex | 2026-04-12 09:36 CST | workspace/t11/ | core-assessment | fixtures 覆盖 schema、answers、scoring、rendering、CLI | done: TDD red/green; code review no must-fix; `go test -count=1 ./internal/questionbank`; `go test -count=1 ./internal/answers ./internal/scoring ./internal/result ./cmd/mbti-cli`; `go test -count=1 ./...`; `make fmt`; `make test`; `make lint`; `make build`; `openspec validate core-assessment`; CLI smokes; change kept active for T12 |
 | T12 | Verification and review repair | 全量验证、代码 review、修复并复验 | T01,T02,T03,T04,T05,T06,T07,T08,T09,T10,T11 | solo | done | codex | 2026-04-12 10:26 CST | workspace/t12/ | core-assessment | fmt/test/lint/build fresh pass，review must-fix 为 0 或已处理 | done: independent review found no must-fix; `make fmt`; `go test -count=1 ./...`; `make test`; `make lint`; `make build`; `openspec validate core-assessment`; success and malformed-bank CLI smokes passed; no code repair needed |
+| T13 | README command docs alignment | 让 README 反映已实现的 `questions` / `score` 命令、题库路径、answer file 形状和本地 smoke 用法 | T09,T10,T12 | docs | done | codex | 2026-04-12 10:53 CST | workspace/t13/ | - | README 不再只描述 skeleton command，示例与当前 CLI flags 一致 | done: final diff review no must-fix; evidence in `workspace/t13/verification.md`; `rg` README checks; `go run . questions ...`; `go run . score ...`; `make fmt`; `make test`; `go test -count=1 ./...`; `make lint`; `make build`; `openspec validate core-assessment`; Change=- because docs-only |
 
 ## 认领规则
 
@@ -85,3 +86,5 @@
 ## Change Log
 
 - 2026-04-11: 初始化第一阶段 core assessment 任务板，冻结 12 个可执行任务。
+- 2026-04-12: 追加 T13 README command docs alignment，修复 README 与已完成 core assessment CLI 的文档漂移。
+- 2026-04-12: 完成 T13，README 已补齐 `questions` / `score`、answer file 形状和非人格诊断措辞。
