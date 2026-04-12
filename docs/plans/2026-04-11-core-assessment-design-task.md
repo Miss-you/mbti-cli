@@ -43,6 +43,7 @@
 | T12 | Verification and review repair | 全量验证、代码 review、修复并复验 | T01,T02,T03,T04,T05,T06,T07,T08,T09,T10,T11 | solo | done | codex | 2026-04-12 10:26 CST | workspace/t12/ | core-assessment | fmt/test/lint/build fresh pass，review must-fix 为 0 或已处理 | done: independent review found no must-fix; `make fmt`; `go test -count=1 ./...`; `make test`; `make lint`; `make build`; `openspec validate core-assessment`; success and malformed-bank CLI smokes passed; no code repair needed |
 | T13 | README command docs alignment | 让 README 反映已实现的 `questions` / `score` 命令、题库路径、answer file 形状和本地 smoke 用法 | T09,T10,T12 | docs | done | codex | 2026-04-12 10:53 CST | workspace/t13/ | - | README 不再只描述 skeleton command，示例与当前 CLI flags 一致 | done: final diff review no must-fix; evidence in `workspace/t13/verification.md`; `rg` README checks; `go run . questions ...`; `go run . score ...`; `make fmt`; `make test`; `go test -count=1 ./...`; `make lint`; `make build`; `openspec validate core-assessment`; Change=- because docs-only |
 | T14 | OpenSpec archive cleanup | 归档已完成的 `core-assessment` change，同步主规格并移除 active change 漂移 | T01,T02,T03,T04,T05,T06,T07,T08,T09,T10,T11,T12,T13 | specs | done | codex | 2026-04-12 12:06 CST | workspace/t14/ | core-assessment | OpenSpec 主规格包含第一阶段能力，active change 不再保留已完成工作 | done: review no must-fix; evidence in `workspace/t14/verification.md`; `openspec validate --all`; `make fmt`; `make test`; `make lint`; `make build`; `go test -count=1 ./...`; no CLI smoke needed because docs/spec cleanup only |
+| T15 | Human research task list alignment | 按已归档的 core assessment 第一阶段，标注 `docs/task.md` 中已被设计、spec 和实现覆盖的调研项，保留后续阶段仍需调研的任务 | T14 | docs | done | codex | 2026-04-12 16:25 CST | workspace/t15/ | - | `docs/task.md` 不再暗示所有 research 都是实现前置，且能区分已决策事项与后续调研事项 | done: review repaired 2 minor docs/check issues; evidence in `workspace/t15/verification.md` and `workspace/t15/code_review.md`; `rg` status checks; `git diff --check`; `make fmt`; `make test`; `make lint`; `make build`; `go test -count=1 ./...`; no CLI/OpenSpec smoke because docs-only |
 
 ## 认领规则
 
@@ -91,3 +92,5 @@
 - 2026-04-12: 完成 T13，README 已补齐 `questions` / `score`、answer file 形状和非人格诊断措辞。
 - 2026-04-12: 追加 T14 OpenSpec archive cleanup，用于收口已完成但仍 active 的 `core-assessment` change。
 - 2026-04-12: 完成 T14，`core-assessment` 已归档，9 个主规格已同步，active change 列表为空。
+- 2026-04-12: 追加 T15 Human research task list alignment，用于同步人工调研清单与已完成的第一阶段 core assessment 状态。
+- 2026-04-12: 完成 T15，`docs/task.md` 已区分第一阶段已冻结决策和后续交互式阶段调研项。
