@@ -1,6 +1,8 @@
 package result
 
 import (
+	"os"
+	"path/filepath"
 	"strings"
 	"testing"
 
@@ -16,46 +18,7 @@ func TestRenderJSONProducesStableGoldenOutput(t *testing.T) {
 	got, err := RenderJSON(summary)
 	require.NoError(t, err)
 
-	require.Equal(t, `{
-  "meta": {
-    "title": "AI Behavioral Style Assessment v3",
-    "version": "0.3.0",
-    "answered": 70,
-    "total": 70
-  },
-  "type": "EXTP",
-  "dimensions": {
-    "EI": {
-      "letter": "E",
-      "score": 8,
-      "strength": "moderate_a",
-      "pole": "E (Expansive)",
-      "balanced": false
-    },
-    "SN": {
-      "letter": "X",
-      "score": 0,
-      "strength": "balanced",
-      "pole": "balanced",
-      "balanced": true
-    },
-    "TF": {
-      "letter": "T",
-      "score": 1,
-      "strength": "slight_a",
-      "pole": "T (Analytical)",
-      "balanced": false
-    },
-    "JP": {
-      "letter": "P",
-      "score": -2,
-      "strength": "slight_b",
-      "pole": "P (Flexible)",
-      "balanced": false
-    }
-  }
-}
-`, string(got))
+	require.Equal(t, readGolden(t, "summary.json.golden"), string(got))
 }
 
 func TestRenderTextProducesReadableFactualSummary(t *testing.T) {
@@ -64,16 +27,7 @@ func TestRenderTextProducesReadableFactualSummary(t *testing.T) {
 
 	got := RenderText(summary)
 
-	require.Equal(t, `AI Behavioral Style Assessment v3 (v0.3.0)
-Type: EXTP
-Answered: 70/70
-
-Dimensions:
-- EI: E, score 8, strength moderate_a, pole E (Expansive)
-- SN: X, score 0, strength balanced, pole balanced
-- TF: T, score 1, strength slight_a, pole T (Analytical)
-- JP: P, score -2, strength slight_b, pole P (Flexible)
-`, got)
+	require.Equal(t, readGolden(t, "summary.txt.golden"), got)
 
 	lower := strings.ToLower(got)
 	require.NotContains(t, lower, "diagnosis")
@@ -138,4 +92,12 @@ func resultClassification() scoring.Classification {
 			},
 		},
 	}
+}
+
+func readGolden(t *testing.T, name string) string {
+	t.Helper()
+
+	data, err := os.ReadFile(filepath.Join("testdata", name))
+	require.NoError(t, err)
+	return string(data)
 }

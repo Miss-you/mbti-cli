@@ -15,6 +15,47 @@ func TestValidateAcceptsCanonicalV3QuestionBank(t *testing.T) {
 	require.NoError(t, Validate(bank))
 }
 
+func TestValidateAcceptsQuestionBankFixture(t *testing.T) {
+	bank := loadQuestionBankFixture(t, "valid-bank.json")
+
+	require.NoError(t, Validate(bank))
+}
+
+func TestValidateRejectsInvalidQuestionBankFixtures(t *testing.T) {
+	tests := []struct {
+		name string
+		file string
+		want string
+	}{
+		{
+			name: "meta total mismatch",
+			file: "invalid-meta-total.json",
+			want: "meta.total",
+		},
+		{
+			name: "duplicate question id",
+			file: "invalid-duplicate-question-id.json",
+			want: "duplicate question id q01",
+		},
+		{
+			name: "threshold overlap",
+			file: "invalid-threshold-overlap.json",
+			want: "threshold moderate_a overlaps threshold slight_a",
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			bank := loadQuestionBankFixture(t, tt.file)
+
+			err := Validate(bank)
+
+			require.Error(t, err)
+			require.ErrorContains(t, err, tt.want)
+		})
+	}
+}
+
 func TestValidateRejectsInvalidQuestionBankSchemas(t *testing.T) {
 	tests := []struct {
 		name   string
@@ -165,6 +206,21 @@ func loadCanonicalV3Bank(t *testing.T) Bank {
 
 	data, err := os.ReadFile(filepath.Join("..", "..", "questions", "mbti-questions-v3.json"))
 	require.NoError(t, err)
+
+	return unmarshalBank(t, data)
+}
+
+func loadQuestionBankFixture(t *testing.T, name string) Bank {
+	t.Helper()
+
+	data, err := os.ReadFile(filepath.Join("testdata", name))
+	require.NoError(t, err)
+
+	return unmarshalBank(t, data)
+}
+
+func unmarshalBank(t *testing.T, data []byte) Bank {
+	t.Helper()
 
 	var bank Bank
 	require.NoError(t, json.Unmarshal(data, &bank))

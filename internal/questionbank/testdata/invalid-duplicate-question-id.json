@@ -1,0 +1,29 @@
+{
+  "meta": {
+    "title": "Fixture Bank",
+    "version": "test",
+    "total": 4,
+    "dimensions": {
+      "EI": {"pole_a": "E (Expansive)", "pole_b": "I (Focused)", "count": 1},
+      "SN": {"pole_a": "S (Concrete)", "pole_b": "N (Abstract)", "count": 1},
+      "TF": {"pole_a": "T (Analytical)", "pole_b": "F (Empathetic)", "count": 1},
+      "JP": {"pole_a": "J (Structured)", "pole_b": "P (Flexible)", "count": 1}
+    },
+    "scoring": {
+      "thresholds": {
+        "strong_a": [13, 999],
+        "moderate_a": [5, 12],
+        "slight_a": [1, 4],
+        "slight_b": [-4, -1],
+        "moderate_b": [-12, -5],
+        "strong_b": [-999, -13]
+      }
+    }
+  },
+  "questions": [
+    {"id": "q01", "dimension": "EI", "reverse": false, "scenario": {"zh": "zh", "en": "en"}, "options": [{"code": "A", "label": {"zh": "A zh", "en": "A en"}, "score": 2}, {"code": "B", "label": {"zh": "B zh", "en": "B en"}, "score": 1}, {"code": "C", "label": {"zh": "C zh", "en": "C en"}, "score": -1}, {"code": "D", "label": {"zh": "D zh", "en": "D en"}, "score": -2}]},
+    {"id": "q01", "dimension": "SN", "reverse": true, "scenario": {"zh": "zh", "en": "en"}, "options": [{"code": "A", "label": {"zh": "A zh", "en": "A en"}, "score": 2}, {"code": "B", "label": {"zh": "B zh", "en": "B en"}, "score": 1}, {"code": "C", "label": {"zh": "C zh", "en": "C en"}, "score": -1}, {"code": "D", "label": {"zh": "D zh", "en": "D en"}, "score": -2}]},
+    {"id": "q03", "dimension": "TF", "reverse": false, "scenario": {"zh": "zh", "en": "en"}, "options": [{"code": "A", "label": {"zh": "A zh", "en": "A en"}, "score": 2}, {"code": "B", "label": {"zh": "B zh", "en": "B en"}, "score": 1}, {"code": "C", "label": {"zh": "C zh", "en": "C en"}, "score": -1}, {"code": "D", "label": {"zh": "D zh", "en": "D en"}, "score": -2}]},
+    {"id": "q04", "dimension": "JP", "reverse": false, "scenario": {"zh": "zh", "en": "en"}, "options": [{"code": "A", "label": {"zh": "A zh", "en": "A en"}, "score": 2}, {"code": "B", "label": {"zh": "B zh", "en": "B en"}, "score": 1}, {"code": "C", "label": {"zh": "C zh", "en": "C en"}, "score": -1}, {"code": "D", "label": {"zh": "D zh", "en": "D en"}, "score": -2}]}
+  ]
+}

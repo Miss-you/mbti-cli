@@ -16,12 +16,13 @@ func TestScoreCommand_RendersCanonicalAnswersAsJSON(t *testing.T) {
 	stdout, stderr, err := executeRoot(t,
 		"score",
 		"--questions", canonicalBankPath(),
-		"--answers", canonicalAnswersFile(t, "A"),
+		"--answers", cliTestdataPath("answers-all-a.json"),
 		"--format", "json",
 	)
 	require.NoError(t, err)
 	require.Empty(t, stderr)
 	require.True(t, bytes.HasSuffix([]byte(stdout), []byte("\n")))
+	require.Equal(t, readCLIGolden(t, "score-all-a.json.golden"), stdout)
 
 	var got scoreJSONOutput
 	require.NoError(t, json.Unmarshal([]byte(stdout), &got))
@@ -40,11 +41,12 @@ func TestScoreCommand_RendersTextSummary(t *testing.T) {
 	stdout, stderr, err := executeRoot(t,
 		"score",
 		"--questions", canonicalBankPath(),
-		"--answers", canonicalAnswersFile(t, "D"),
+		"--answers", cliTestdataPath("answers-all-d.json"),
 		"--format", "text",
 	)
 	require.NoError(t, err)
 	require.Empty(t, stderr)
+	require.Equal(t, readCLIGolden(t, "score-all-d.txt.golden"), stdout)
 
 	require.Contains(t, stdout, "AI Behavioral Style Assessment v3 (v0.3.0)")
 	require.Contains(t, stdout, "Type: INFP")
