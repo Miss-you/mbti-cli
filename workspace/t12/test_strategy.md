@@ -5,6 +5,7 @@ Goal: prove that the first-stage core assessment loop remains aligned across cod
 Required gates:
 
 - `make fmt`
+- `go test -count=1 ./...`
 - `make test`
 - `make lint`
 - `make build`
