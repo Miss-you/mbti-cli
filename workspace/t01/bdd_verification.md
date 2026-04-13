@@ -35,3 +35,19 @@ Observed results:
 - Focused Ginkgo: 1 spec passed, 0 failed.
 - Package test: `ok github.com/Miss-you/mbti-cli/internal/questionbank`.
 - Full Go test: all packages passed.
+
+## Fresh Verification - 2026-04-13
+
+Commands:
+
+```bash
+go test -v ./internal/questionbank -run TestQuestionbank -count=1 -ginkgo.v
+go test -count=1 ./internal/questionbank
+go test -count=1 ./...
+```
+
+Observed results:
+
+- Focused Ginkgo: 13 specs passed, 0 failed.
+- Package test: `ok github.com/Miss-you/mbti-cli/internal/questionbank`.
+- Full Go test: all packages passed.

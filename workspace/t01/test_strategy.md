@@ -2,28 +2,28 @@
 
 ## What To Prove
 
-T01 must prove that the Go model can unmarshal the canonical v3 question bank without losing fields needed by later tasks.
+T01 must prove that the Go model can unmarshal the canonical v3 question bank without losing representative fields needed by later tasks, while keeping validation, loading, scoring, rendering, and CLI behavior outside the model task.
 
 ## Focused Test
 
 Run:
 
 ```bash
-go test ./internal/questionbank
+go test -v ./internal/questionbank -run TestQuestionbank -count=1 -ginkgo.v
+go test -count=1 ./internal/questionbank
 ```
 
 The test will:
 
 - read `questions/mbti-questions-v3.json`
-- unmarshal into `questionbank.Bank`
-- marshal the model back to JSON and compare it to the canonical raw JSON structure
-- assert meta title/version/total
-- assert all 70 questions are present
-- assert all four dimension metadata entries are addressable
-- assert all scoring thresholds unmarshal as exact two-int ranges
-- assert every question has unmarshaled id, dimension, reverse, localized scenario, and four options
-- assert every option has unmarshaled code, localized label, and signed score
-- assert representative first and last question values match the canonical v3 file
+- unmarshal directly into `questionbank.Bank`
+- assert representative meta title/title_zh/version/total
+- assert a representative dimension metadata entry is available by typed dimension key
+- assert representative scoring threshold ranges unmarshal as exact two-int ranges
+- assert all 70 questions are present without requiring exhaustive per-question checks
+- assert one canonical first question preserves id, dimension, reverse flag, localized scenario, option code, localized option label, and signed score
+- assert one reversed question preserves the `reverse` flag
+- avoid full JSON round-trip equality, schema-invalid fixtures, loader behavior, validation behavior, scoring behavior, rendering behavior, and CLI behavior in T01 BDD
 
 ## Out Of Scope
 

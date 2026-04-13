@@ -56,7 +56,7 @@ assertion can fail before restoring the final expectation. The focused command
 should fail on the behavior assertion, not on suite wiring:
 
 ```bash
-go test -v ./internal/questionbank -run TestQuestionBank -count=1 -ginkgo.v
+go test -v ./internal/questionbank -run TestQuestionbank -count=1 -ginkgo.v
 ```
 
 ## Verification
@@ -64,7 +64,7 @@ go test -v ./internal/questionbank -run TestQuestionBank -count=1 -ginkgo.v
 Focused:
 
 ```bash
-go test -v ./internal/questionbank -run TestQuestionBank -count=1 -ginkgo.v
+go test -v ./internal/questionbank -run TestQuestionbank -count=1 -ginkgo.v
 go test -count=1 ./internal/questionbank
 ```
 
