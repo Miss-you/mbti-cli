@@ -29,3 +29,17 @@ None.
 - No schema-invalid fixture scenario.
 - No loader, validation, scoring, rendering, or CLI coverage.
 - Negative control, if used, should fail on the preserved-field assertion.
+
+## Follow-up Review Evaluation
+
+### Adopted
+
+1. Adopt: update focused verification commands from `-run TestQuestionBank` to `-run TestQuestionbank`.
+   - Reason: `internal/questionbank/questionbank_suite_test.go` defines `TestQuestionbank`; the documented command should select the real suite.
+
+2. Adopt: align `workspace/t01/test_strategy.md` with the final representative-field BDD plan.
+   - Reason: the previous strategy still described full JSON round-trip equality and exhaustive per-question checks, which is broader than the adopted T01 BDD scope.
+
+### Rejected
+
+None.

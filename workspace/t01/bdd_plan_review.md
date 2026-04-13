@@ -35,3 +35,12 @@ The main risk is that it drifts from spec-first behavior into implementation pro
 - Do not add or modify test code in `internal/questionbank`.
 - Do not cover loader behavior, invalid-file handling, validation, scoring, or CLI commands in this review.
 - Do not convert the existing TDD test into a mechanical BDD rewrite.
+
+## Follow-up Review
+
+The final T01 Ginkgo spec is aligned with the adopted representative-field shape and does not need production or test-code changes.
+
+Additional workspace cleanup recommendations:
+
+1. Update the focused verification command from `-run TestQuestionBank` to `-run TestQuestionbank`, matching the actual suite entrypoint in `internal/questionbank/questionbank_suite_test.go`.
+2. Align `workspace/t01/test_strategy.md` with the final representative-field BDD strategy so it no longer describes round-trip JSON equality or exhaustive per-question assertions.
