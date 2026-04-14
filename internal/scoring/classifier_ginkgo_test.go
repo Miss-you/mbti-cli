@@ -79,6 +79,31 @@ var _ = Describe("Scoring classifier", func() {
 		})
 	})
 
+	When("a dimension score is zero and no threshold bucket is configured", func() {
+		It("classifies the dimension as balanced without a strength lookup", func() {
+			bank := classifierSpecBank()
+			bank.Meta.Scoring.Thresholds = map[questionbank.Strength]questionbank.ThresholdRange{}
+
+			classification, err := Classify(bank, Result{
+				DimensionScores: map[questionbank.Dimension]int{
+					questionbank.DimensionEI: 0,
+					questionbank.DimensionSN: 0,
+					questionbank.DimensionTF: 0,
+					questionbank.DimensionJP: 0,
+				},
+			})
+
+			Expect(err).NotTo(HaveOccurred())
+			Expect(classification.Type).To(Equal("XXXX"))
+
+			ei := classification.Dimensions[questionbank.DimensionEI]
+			Expect(ei.Score).To(Equal(0))
+			Expect(ei.Pole).To(Equal("balanced"))
+			Expect(ei.Letter).To(Equal("X"))
+			Expect(ei.Balanced).To(BeTrue())
+		})
+	})
+
 	When("required classifier metadata is unavailable", func() {
 		It("returns a contextual error for a missing threshold range", func() {
 			bank := classifierSpecBank()
